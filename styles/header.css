@@ -1,0 +1,45 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.background{
+    background-color:#D9E8E5;
+    height: 90vh;
+    margin-top: 10vh;
+}
+.website-header{
+    background-color: #eedbcd;
+    display: grid;
+    grid-template-columns: 400px repeat(5, 1fr);
+    position: fixed;
+    align-items: center;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: 140px;
+    border-bottom: 3px dotted black;
+}
+.title{
+    height: 140px;
+    width: 100%;
+}
+.image-wrap-margin{
+    margin-right: 60px;
+}
+.pinned-topic{
+    width: 140px;
+    font-size: 21pt;
+    font-family: "Playfair Display";
+    font-weight: 600;
+    color: #175a4c;
+    background-color: #e0dce5;
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+    cursor: pointer;
+    transition: color .2s, background-color .2s;
+}
+.pinned-topic:hover{
+    color: #e0dce5;
+    background-color: #175a4c;
+}
