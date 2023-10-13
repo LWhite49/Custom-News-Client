@@ -21,3 +21,40 @@ customKeywordArray.forEach( (keyword, index) => {
 headerElem.innerHTML = putString;
 
 /* Create a function that accepts a keyword and returns an array of articles from newsAPI */
+
+const returnArticleArray = (keyword) => {
+
+    /* Figure out the date ONE months ago using getTimes */
+    const d = new Date();
+    let date = d.getDate;
+    let month = d.getMonth();
+    let year = d.getFullYear();
+    if (month < 1) {
+        if (month == 0) { month = 11; }
+        year -= 1;
+    }
+    else {month -= 1;}
+
+    /* Create dateString and format URL for fetching API */
+    let dateString;
+    if (month < 9) { dateString = `${year}-0${month+1}-${date}`; }
+
+    else {dateString = `${year}-${month+1}-0${date}`; }
+    const URL = `https://newsapi.org/v2/everything?q=${keyword}&from=${dateString}&apikey=7ff368666b8e492e9e48f660c629b39e`;
+    /* Make request for given Keyword */
+    fetch(URL).then(response => response.json()).then(result => {
+      if (result.status === "ok") {
+        if (result.articles.length === 0) {
+          throw new Error("No Articles for Keyword");
+        }
+        console.log(result.articles[2]);
+      } else {
+        throw new Error(`Error Code ${result.code}: ${result.message}`);
+      }
+    })
+    .catch(error => {
+      console.log(`Error: ${error}`);
+    });
+  console.log(URL);
+}
+returnArticleArray("Ahahjc ash==ashjdv");
