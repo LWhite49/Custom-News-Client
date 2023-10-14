@@ -5,7 +5,8 @@ body{
 .background{
     background-color:#D9E8E5;
     height: 90vh;
-    margin-top: 10vh;
+    margin-top: 140px;
+    z-index: -1;
 }
 .website-header{
     background-color: #eedbcd;
@@ -42,4 +43,8 @@ body{
 .pinned-topic:hover{
     color: #e0dce5;
     background-color: #175a4c;
+}
+.sortby-select{
+    position: relative;
+    top: 10vh;
 }

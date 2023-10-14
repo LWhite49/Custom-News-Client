@@ -3,8 +3,8 @@
 
 /* Pull HTML elements */
 const headerElem = document.querySelector(".website-header");
+const sortbyElem = document.querySelector(".sortby-select");
 /* Pull from localStorage to create an array of custom keywords to generate headerHTML */
-
 const customKeywordArray = [
     localStorage.getItem("ck1") || "Science",
     localStorage.getItem("ck1") || "Culture",
@@ -18,12 +18,11 @@ let putString = `<span class="image-wrap-margin"><img class="title" src="./image
 customKeywordArray.forEach( (keyword, index) => {
     putString += `<button class="topic${index} pinned-topic" data-keyword="${keyword}">${keyword}</button>`;
 });
-headerElem.innerHTML = putString;
 
+headerElem.innerHTML = putString;
 /* Create a function that accepts a keyword and returns an array of articles from newsAPI */
 
-const returnArticleArray = (keyword) => {
-
+const returnArticleArray = (keyword, sortby) => {
     /* Figure out the date ONE months ago using getTimes */
     const d = new Date();
     let date = d.getDate;
@@ -38,16 +37,15 @@ const returnArticleArray = (keyword) => {
     /* Create dateString and format URL for fetching API */
     let dateString;
     if (month < 9) { dateString = `${year}-0${month+1}-${date}`; }
-
     else {dateString = `${year}-${month+1}-0${date}`; }
-    const URL = `https://newsapi.org/v2/everything?q=${keyword}&from=${dateString}&apikey=7ff368666b8e492e9e48f660c629b39e`;
+    const URL = `https://newsapi.org/v2/everything?q=${keyword}&from=${dateString}&sortBy=${sortby}&apikey=7ff368666b8e492e9e48f660c629b39e`;
     /* Make request for given Keyword */
     fetch(URL).then(response => response.json()).then(result => {
       if (result.status === "ok") {
         if (result.articles.length === 0) {
           throw new Error("No Articles for Keyword");
         }
-        console.log(result.articles[2]);
+        console.log(result.articles[3]);
       } else {
         throw new Error(`Error Code ${result.code}: ${result.message}`);
       }
@@ -57,4 +55,4 @@ const returnArticleArray = (keyword) => {
     });
   console.log(URL);
 }
-returnArticleArray("Ahahjc ash==ashjdv");
+returnArticleArray("Baseball", sortbyElem.value);
