@@ -40,19 +40,18 @@ const returnArticleArray = (keyword, sortby) => {
     else {dateString = `${year}-${month+1}-0${date}`; }
     const URL = `https://newsapi.org/v2/everything?q=${keyword}&from=${dateString}&sortBy=${sortby}&apikey=7ff368666b8e492e9e48f660c629b39e`;
     /* Make request for given Keyword */
-    fetch(URL).then(response => response.json()).then(result => {
-      if (result.status === "ok") {
-        if (result.articles.length === 0) {
-          throw new Error("No Articles for Keyword");
-        }
-        console.log(result.articles[3]);
-      } else {
-        throw new Error(`Error Code ${result.code}: ${result.message}`);
-      }
-    })
-    .catch(error => {
-      console.log(`Error: ${error}`);
-    });
-  console.log(URL);
-}
-returnArticleArray("Baseball", sortbyElem.value);
+    // fetch(URL).then(response => response.json()).then(result => {
+    //   if (result.status === "ok") {
+    //     if (result.articles.length === 0) {
+    //       throw new Error("No Articles for Keyword");
+    //     }
+    //     console.log(result);
+    //   } else {
+    //     throw new Error(`Error Code ${result.code}: ${result.message}`);
+    //   }
+    // })
+    // .catch(error => {
+    //   console.log(`Error: ${error}`);
+    // });
+  }
+returnArticleArray("Hockey", sortbyElem.value);
