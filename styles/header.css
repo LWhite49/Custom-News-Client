@@ -49,53 +49,99 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 200px;
 }
 .article-display{
     display: flex;
-    width: 2000px;
+    width: 1200px;
     height: 200px;
-    background-color: orange;
+    background-color: #E6DBE1;
     padding: 0px;
-    padding: 1% 2% 1% 2%;
+    padding: 16px;
+    border-width: 6px;
+    border-style:double;
+    border-radius: 20px;
+    border-color: #175a4c;
 }
 .article-display-left{
     display: flex;
     flex-direction: column;
     width: 80%;
     height:100%;
-    background-color: red;
 }
 .article-display-first-textline{
     display: flex;
-    height:32%;
-    background-color: yellow;
+    height:33%;
 }
 .article-display-title-wrap{
     display: flex;
-    width: 70%;
+    width: 60%;
     height: 100%;
+    margin-left: 2%;
     align-items: center;
     
 }
 .article-display-title{
-    width:100%;
-    font-size: 20pt;
-    padding: 0px 0px 0px 2%;
+    display: inline-block;
+    font-size: 23pt;
     margin: 0px;
-    background-color: green;
 }
 .article-display-date-wrap{
     display: flex;
     align-items: center;
-    width: 28%;
+    width: 38%;
     margin-left: 2%;
 }
 .article-display-date{
-    width: 100%;
+    display: inline-block;
     font-size: 20pt;
-    padding: 0px 0px 0px 2%;
     margin: 0px;
-    background-color: blue;
+}
+.article-display-second-textline{
+    display: flex;
+    height:32%;
+}
+.article-display-author-wrap{
+    display: flex;
+    width: 60%;
+    height: 100%;
+    margin-left: 2%;
+    align-items: center;
+}
+.article-display-author{
+    display: inline-block;
+    font-size: 20pt;
+    margin: 0px;
+}
+.article-display-source-wrap{
+    display: flex;
+    align-items: center;
+    width: 38%;
+    margin-left: 2%;
+}
+.article-display-source{
+     font-size: 20pt;
+     margin: 0px;
+     display: inline-block;
+}
+.article-display-third-textline{
+    display: flex;
+    height:36%;
+}
+.article-display-link-wrap{
+    display: flex;
+    align-items: center;
+    padding:0px;
+    width:96%;
+    height:100%;
+    margin-left: 2%;
+}
+.article-display-link{
+    font-size: 20pt;
+    height: 100%;
+    margin: 0px;
+    margin-top: 22px;
+    display: inline-block;
 }
 .article-display-right{
     height: 100%;
@@ -105,4 +151,8 @@ body{
 .article-display-image{
     height: 100%;
     width: 100%;
+    border-width: 4px;
+    border-radius: 10px;
+    border-style:double;
+    border-color:#175a4c;
 }
