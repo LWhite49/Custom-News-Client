@@ -76,40 +76,47 @@ body{
 }
 .article-display-title-wrap{
     display: flex;
-    width: 60%;
+    overflow: hidden;
+    width: 78%;
     height: 100%;
     margin-left: 2%;
     align-items: center;
 }
 .article-display-title{
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 0;
     font-family: "Gabarito";
-    font-size: 22pt;
+    font-size: 20pt;
     font-weight: 600;
     margin: 0px;
     width: 92%;
+    min-width: 0px;
     background-color: #DECFD7;
-    padding: 4px 18px 4px 18px;
+    padding: 8px 18px 8px 18px;
     border-radius: 14px;
     border-color: #175a4c;
-    border-style: double;
     border-width: 4px;
+    border-style: double;
+    
 }
 .article-display-date-wrap{
     display: flex;
     align-items: center;
-    width: 38%;
-    margin-left: 2%;
+    width: 16%;
+    margin-left: 0%;
 }
 .article-display-date{
     display: inline-block;
+    text-align: center;
     font-family: "Gabarito";
-    font-size: 20pt;
+    font-size: 18pt;
     font-weight: 300;
     margin: 0px;
-    width: 85%;
+    width: 92%;
     background-color: #DECFD7;
-    padding: 4px 18px 4px 18px;
+    padding: 8px 18px 8px 18px;
     border-radius: 14px;
     border-color: #175a4c;
     border-style: double;
@@ -123,7 +130,7 @@ body{
 }
 .article-display-author-wrap{
     display: flex;
-    width: 60%;
+    width: 50%;
     height: 100%;
     margin-left: 2%;
     align-items: center;
@@ -137,7 +144,7 @@ body{
     margin: 0px;
     width: 92%;
     background-color: #DECFD7;
-    padding: 4px 18px 4px 18px;
+    padding: 6px 18px 6px 18px;
     border-radius: 14px;
     border-color: #175a4c;
     border-style: double;
@@ -146,19 +153,18 @@ body{
 .article-display-source-wrap{
     display: flex;
     align-items: center;
-    width: 38%;
+    width: 50%;
     margin-left: 2%;
 }
 .article-display-source{
-    font-size: 20pt;
-    font-family: "Gabarito";
     font-size: 18pt;
+    font-family: "Gabarito";
     font-weight: 600;
     margin: 0px;
     width: 85%;
     display: inline-block;
     background-color: #DECFD7;
-    padding: 8px 18px 8px 18px;
+    padding: 6px 18px 6px 18px;
     border-radius: 14px;
     border-color: #175a4c;
     border-style: double;
@@ -167,13 +173,14 @@ body{
 .article-display-third-textline{
     display: flex;
     height:30%;
-    justify-content: center;
 }
 .article-display-link-wrap{
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     padding:0px;
     height:100%;
+    width: 94.3%;
     margin-left: 2%;
 }
 .article-display-link{
@@ -182,6 +189,7 @@ body{
     font-family: "Gabarito";
     font-size: 18pt;
     text-align: center;
+    color: #175a4c;
     width: 100%;
     margin: 0px;
     margin-top: 22px;
