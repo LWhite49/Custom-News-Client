@@ -6,35 +6,62 @@ const headerElem = document.querySelector(".website-header");
 const sortbyElem = document.querySelector(".sortby-select");
 const errorOutputElem = document.querySelector(".search-error-output");
 const articleFeedOutputElem = document.querySelector(".article-output-wrap");
-/* CREATE THE HEADER BUTTONS BY PULLING FROM LOCAL STORAGE AND USING HTML GENERATION, THEN ADD ONCLICK LISTENERS TO GENERATE ARTICLES FOR EACH */
+/* CREATE THE HEADER BUTTONS BY PULLING FROM LOCAL STORAGE AND USING HTML GENERATION, THEN ADD ONCLICK LISTENERS TO GENERATE ARTICLES FOR EACH. 
+   DONE BY CREATING FOUR FUNCTIONS THAT CALL KEYWORDS FROM LOCAL STORAGE INTO AN ARRAY, ONE THAT UPDATES HEADER HTML USING THAT ARRAY,
+   ONE THAT STORES EACH BUTTON ELEMENT INTO AN ARRAY, AND ONE THAT USES THAT ARRAY TO ADD ONCLICK LISTENERS. CALL ALL FOUR.  */
 
 
-/* Pull from localStorage to create an array of custom keywords to generate headerHTML */
-const customKeywordArray = [
-    localStorage.getItem("ck1") || "Science",
-    localStorage.getItem("ck1") || "Culture",
-    localStorage.getItem("ck3") || "Health",
-    localStorage.getItem("ck4") || "Sports",
-    localStorage.getItem("ck5") || "Activism" ];
+/* Function that pulls from localStorage to create an array of custom keywords to generate headerHTML, Call it*/
+let customKeywordArray;
+const updateCustomKeywordArray = () => {
+    customKeywordArray = [
+        localStorage.getItem("ck1") || "Science",
+        localStorage.getItem("ck1") || "Culture",
+        localStorage.getItem("ck3") || "Health",
+        localStorage.getItem("ck4") || "Sports",
+        localStorage.getItem("ck5") || "Activism" ];
+}
+updateCustomKeywordArray();
 
-/* Iterate items in customKeywordArray, using their values to generate html code that is added to putString, which is then mapped to headerElem */
-let putString = `<span class="image-wrap-margin"><img class="title" src="./images/CustomNewsClientLogo.PNG"/></span>`;
 
-customKeywordArray.forEach( (keyword, index) => {
-    putString += `<button class="topic${index} pinned-topic" data-keyword="${keyword}">${keyword}</button>`;
-});
-/* Paste the generated HTML onto the header flexbox */
-headerElem.innerHTML = putString;
+/* Function that iterate items in customKeywordArray, using their values to generate html code that is added to putString, which is then mapped to headerElem, Call it */
+let putString;
+const updateHeaderHTML = (customKeywordArray) => {
+    putString = `<span class="image-wrap-margin"><img class="title" src="./images/CustomNewsClientLogo.PNG"/></span>`;
+    customKeywordArray.forEach( (keyword, index) => {
+        putString += `<button class="topic${index} pinned-topic" data-keyword="${keyword.substring(0,1).toLowerCase() + keyword.substring(1)}">${keyword}</button>`;
+        /* Paste the generated HTML onto the header flexbox */
+    });
+    headerElem.innerHTML = putString;
+}
+updateHeaderHTML(customKeywordArray);
 
-// /* Create a function that accepts customKeywordArray, and adds event clickers to each header button that runs renderArticleFeed with the dataset keyword */
-// const addHeaderOnclicks = (customKeywordArray) => {
-//     customKeywordArray.forEach((badKeyword, index) => {
-//         const tempButtonElem = document.querySelector(`.topic${index}`);
-//         tempButtonElem.addEventListener("onclick", (keyword) => {
-//             renderArticleFeed(`${tempButtonElem.dataset.keyword}`, sortbyElem.value);
-//         })
-//     })
-// }
+
+/* Create a function that creates an array of header button elements */
+let headerButtonElemArray;
+const updateHeaderButtonElemArray = () => {
+    headerButtonElemArray = [
+        document.querySelector(".topic0"),
+        document.querySelector(".topic1"),
+        document.querySelector(".topic2"),
+        document.querySelector(".topic3"),
+        document.querySelector(".topic4")
+    ];
+}
+updateHeaderButtonElemArray();
+
+
+
+/* Create a function that accepts headerButtonElemArray, and adds onclick listeners for each that render article feed */
+const updateHeaderButtonOnclicks = (headerButtonElemArray) => {
+    headerButtonElemArray.forEach((button, index) => {
+        button.addEventListener("click", () => {           
+            renderArticleFeed(`${button.dataset.keyword.substring(0,1).toLowerCase() + button.dataset.keyword.substring(1)}`, sortbyElem.value);
+        });
+    });
+}
+
+updateHeaderButtonOnclicks(headerButtonElemArray);
 
 
 /* CREATE A FUNCTION THAT WILL ACCEPT A KEYWORD AND SORTBY PREFERENCE, FETCH DATA FROM NEWSAPI USING THOSE PARAMETERS
@@ -132,3 +159,4 @@ const renderArticleFeed = (keyword, sortby) => {
       console.log(`Error: ${error}`);
     });
   }
+
