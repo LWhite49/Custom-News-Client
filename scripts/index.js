@@ -108,7 +108,7 @@ const renderArticleFeed = (keyword, sortby) => {
                 <div class="article-display-left">
                     <div class="article-display-first-textline">
                         <div class="article-display-title-wrap">
-                            <p class="article-display-title">${article.title}</p>;
+                            <p class="article-display-title">${article.title}</p>
                         </div>`;
             /* Parse date output to store correct format in dateVal */
             let dateVal = `${article.publishedAt.substring(5,7)}-${article.publishedAt.substring(8, 10)}-${article.publishedAt.substring(0, 4)}`;

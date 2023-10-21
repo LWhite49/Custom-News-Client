@@ -91,7 +91,7 @@ body{
 }
 .article-display-title-wrap{
     display: flex;
-    overflow: hidden;
+    overflow:hidden;
     width: 78%;
     height: 100%;
     margin-left: 2%;
