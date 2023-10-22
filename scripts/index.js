@@ -6,6 +6,9 @@ const headerElem = document.querySelector(".website-header");
 const sortbyElem = document.querySelector(".sortby-select");
 const errorOutputElem = document.querySelector(".search-error-output");
 const articleFeedOutputElem = document.querySelector(".article-output-wrap");
+const generateArticleButtonElem = document.querySelector(".generate-articles-button");
+const keywordInputElem = document.querySelector(".search-input");
+
 /* CREATE THE HEADER BUTTONS BY PULLING FROM LOCAL STORAGE AND USING HTML GENERATION, THEN ADD ONCLICK LISTENERS TO GENERATE ARTICLES FOR EACH. 
    DONE BY CREATING FOUR FUNCTIONS THAT CALL KEYWORDS FROM LOCAL STORAGE INTO AN ARRAY, ONE THAT UPDATES HEADER HTML USING THAT ARRAY,
    ONE THAT STORES EACH BUTTON ELEMENT INTO AN ARRAY, AND ONE THAT USES THAT ARRAY TO ADD ONCLICK LISTENERS. CALL ALL FOUR.  */
@@ -159,4 +162,15 @@ const renderArticleFeed = (keyword, sortby) => {
       console.log(`Error: ${error}`);
     });
   }
+
+/* Add keydown listener to generate articles if "Enter" is pressed */
+keywordInputElem.addEventListener("keydown", (event) => {
+    if (event.key == "Enter") {
+        renderArticleFeed(keywordInputElem.value.substring(0,1).toLowerCase() + keywordInputElem.value.substring(1), sortbyElem.value);
+    }
+})
+/* Add click listener to generate articles button that generates articles for the user inputted keyword and sort method */
+generateArticleButtonElem.addEventListener("click", () => {
+    renderArticleFeed(keywordInputElem.value.substring(0,1).toLowerCase() + keywordInputElem.value.substring(1), sortbyElem.value);
+});
 
