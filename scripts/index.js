@@ -79,6 +79,16 @@ const renderArticleFeed = (keyword, sortby) => {
     let date = d.getDate();
     let month = d.getMonth();
     let year = d.getFullYear();
+
+    /* Move date one day more recent */
+    if (date > 27) {
+        date = 0;
+        if (month == 11) {month = 0}
+        else (month += 1)
+    }
+    else { date += 1 }
+
+    /* Move month one month earlier */
     if (month < 1) {
         if (month == 0) { month = 11; }
         year -= 1;
