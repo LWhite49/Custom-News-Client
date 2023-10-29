@@ -8,6 +8,8 @@ const errorOutputElem = document.querySelector(".search-error-output");
 const articleFeedOutputElem = document.querySelector(".article-output-wrap");
 const generateArticleButtonElem = document.querySelector(".generate-articles-button");
 const keywordInputElem = document.querySelector(".search-input");
+const englishOnlyInputElem = document.getElementById("language-toggle");
+
 
 /* CREATE THE HEADER BUTTONS BY PULLING FROM LOCAL STORAGE AND USING HTML GENERATION, THEN ADD ONCLICK LISTENERS TO GENERATE ARTICLES FOR EACH. 
    DONE BY CREATING FOUR FUNCTIONS THAT CALL KEYWORDS FROM LOCAL STORAGE INTO AN ARRAY, ONE THAT UPDATES HEADER HTML USING THAT ARRAY,
@@ -24,6 +26,7 @@ const updateCustomKeywordArray = () => {
         localStorage.getItem("ck4") || "Sports",
         localStorage.getItem("ck5") || "Activism" ];
 }
+
 updateCustomKeywordArray();
 
 
@@ -37,6 +40,7 @@ const updateHeaderHTML = (customKeywordArray) => {
     });
     headerElem.innerHTML = putString;
 }
+
 updateHeaderHTML(customKeywordArray);
 
 
@@ -51,6 +55,7 @@ const updateHeaderButtonElemArray = () => {
         document.querySelector(".topic4")
     ];
 }
+
 updateHeaderButtonElemArray();
 
 
@@ -99,7 +104,13 @@ const renderArticleFeed = (keyword, sortby) => {
     let dateString;
     if (month < 9) { dateString = `${year}-0${month+1}-${date}`; }
     else {dateString = `${year}-${month+1}-0${date}`; }
-    const URL = `https://newsapi.org/v2/everything?q=${keyword}&from=${dateString}&sortBy=${sortby}&apikey=7ff368666b8e492e9e48f660c629b39e`;
+
+    let URL;
+    /* Check to see if request should only search for english articles */
+    if (englishOnlyInputElem.value == "on") { URL = `https://newsapi.org/v2/everything?q=${keyword}&from=${dateString}&sortBy=${sortby}&language=en&apikey=7ff368666b8e492e9e48f660c629b39e`;
+        console.log("English");
+    console.log(englishOnlyInputElem.value)}
+    else { URL = `https://newsapi.org/v2/everything?q=${keyword}&from=${dateString}&sortBy=${sortby}&apikey=7ff368666b8e492e9e48f660c629b39e`; }
     /* Make request for given Keyword */
     fetch(URL).then(response => response.json()).then(result => {
       /* If result.status is not okay, throw error saying the request failed */
@@ -114,6 +125,7 @@ const renderArticleFeed = (keyword, sortby) => {
         let temp;
         /* Iterate each article adding the temp string to assemblyString */
         result.articles.forEach( (article, index) => {
+
             temp = ``;
             /* Add up to article title */
             temp += `
@@ -154,10 +166,16 @@ const renderArticleFeed = (keyword, sortby) => {
             /* Add the article image and right side of article output, finishing temp HTML generation */
             temp += `
             <div class="article-display-right">
-                    <img class="article-display-image" src="${article.urlToImage}"/>
+                <a class="image-anchor-tag" href="${article.url}" target="_blank">
+                        <img class="article-display-image" src="${article.urlToImage}"/>
+                    </a>
                 </div>
             </div>`;
-            /* Add temp to assemblyString */
+
+            /* Check image source and title to validate the article */
+            if (article.urlToImage == null || article.title == "[Removed]") { temp = ``;}
+            
+            /* Add temp (which contains nothing if the above branch is taken) to assemblyString */
             assemblyString += temp;
         });
         /* Paste generated HTML inside assemblyString onto the article output wrap element */
@@ -178,9 +196,27 @@ keywordInputElem.addEventListener("keydown", (event) => {
     if (event.key == "Enter") {
         renderArticleFeed(keywordInputElem.value.substring(0,1).toLowerCase() + keywordInputElem.value.substring(1), sortbyElem.value);
     }
-})
+});
+
+/* Set checkbox value to unchecked */
+englishOnlyInputElem.checked = false;
+
+/* Add event listener to checkbox that updates the value of checked each time */
+englishOnlyInputElem.addEventListener("click", () => {
+    if (englishOnlyInputElem.value=="off") {
+        englishOnlyInputElem.value="on";
+        console.log(englishOnlyInputElem.value);
+    }
+    else {
+        englishOnlyInputElem.value="off";
+        console.log(englishOnlyInputElem.value);
+    }
+});
+
 /* Add click listener to generate articles button that generates articles for the user inputted keyword and sort method */
 generateArticleButtonElem.addEventListener("click", () => {
     renderArticleFeed(keywordInputElem.value.substring(0,1).toLowerCase() + keywordInputElem.value.substring(1), sortbyElem.value);
 });
+
+console.log(englishOnlyInputElem.value);
 
