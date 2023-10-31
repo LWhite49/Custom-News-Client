@@ -9,7 +9,7 @@ const articleFeedOutputElem = document.querySelector(".article-output-wrap");
 const generateArticleButtonElem = document.querySelector(".generate-articles-button");
 const keywordInputElem = document.querySelector(".search-input");
 const englishOnlyInputElem = document.getElementById("language-toggle");
-
+const saveKeywordButtonElem = document.querySelector(".save-keyword-button");
 
 /* CREATE THE HEADER BUTTONS BY PULLING FROM LOCAL STORAGE AND USING HTML GENERATION, THEN ADD ONCLICK LISTENERS TO GENERATE ARTICLES FOR EACH. 
    DONE BY CREATING FOUR FUNCTIONS THAT CALL KEYWORDS FROM LOCAL STORAGE INTO AN ARRAY, ONE THAT UPDATES HEADER HTML USING THAT ARRAY,
@@ -21,7 +21,7 @@ let customKeywordArray;
 const updateCustomKeywordArray = () => {
     customKeywordArray = [
         localStorage.getItem("ck1") || "Science",
-        localStorage.getItem("ck1") || "Culture",
+        localStorage.getItem("ck2") || "Culture",
         localStorage.getItem("ck3") || "Health",
         localStorage.getItem("ck4") || "Sports",
         localStorage.getItem("ck5") || "Activism" ];
@@ -30,13 +30,19 @@ const updateCustomKeywordArray = () => {
 updateCustomKeywordArray();
 
 
-/* Function that iterate items in customKeywordArray, using their values to generate html code that is added to putString, which is then mapped to headerElem, Call it */
+/* Function that iterate items in customKeywordArray, using their values to generate html code that is added to putString, which is then mapped to headerElem. 
+   It also maps the keywords in the array to the "Save Over" dropdown menu. Call it */
 let putString;
 const updateHeaderHTML = (customKeywordArray) => {
     putString = `<span class="image-wrap-margin"><img class="title" src="./images/CustomNewsClientLogo.PNG"/></span>`;
     customKeywordArray.forEach( (keyword, index) => {
         putString += `<button class="topic${index} pinned-topic" data-keyword="${keyword.substring(0,1).toLowerCase() + keyword.substring(1)}">${keyword}</button>`;
         /* Paste the generated HTML onto the header flexbox */
+    });
+
+    /* Iterate replace keyword dropdown elements */
+    document.querySelectorAll(".keyword-slot-option").forEach( (button, index) => {
+        button.innerHTML = customKeywordArray[index];
     });
     headerElem.innerHTML = putString;
 }
@@ -180,6 +186,8 @@ const renderArticleFeed = (keyword, sortby) => {
         });
         /* Paste generated HTML inside assemblyString onto the article output wrap element */
         articleFeedOutputElem.innerHTML = assemblyString;
+        /* Clear error field */
+        errorOutputElem.innerHTML = '';
       } else {
         /* Update error output field */
         errorOutputElem.innerHTML = `Opps! Request to server was unsuccessful.`
@@ -198,19 +206,11 @@ keywordInputElem.addEventListener("keydown", (event) => {
     }
 });
 
-/* Set checkbox value to unchecked */
-englishOnlyInputElem.checked = false;
 
 /* Add event listener to checkbox that updates the value of checked each time */
 englishOnlyInputElem.addEventListener("click", () => {
-    if (englishOnlyInputElem.value=="off") {
-        englishOnlyInputElem.value="on";
-        console.log(englishOnlyInputElem.value);
-    }
-    else {
-        englishOnlyInputElem.value="off";
-        console.log(englishOnlyInputElem.value);
-    }
+    if (englishOnlyInputElem.value=="off") { englishOnlyInputElem.value="on"; }
+    else { englishOnlyInputElem.value="off"; }
 });
 
 /* Add click listener to generate articles button that generates articles for the user inputted keyword and sort method */
@@ -218,5 +218,17 @@ generateArticleButtonElem.addEventListener("click", () => {
     renderArticleFeed(keywordInputElem.value.substring(0,1).toLowerCase() + keywordInputElem.value.substring(1), sortbyElem.value);
 });
 
-console.log(englishOnlyInputElem.value);
+/* Add click listener to save keyword button that saves the new keyword in local storage, then rerenders the header buttons */
+saveKeywordButtonElem.addEventListener("click", () => {
+    const newKeyword = keywordInputElem.value;
+    const replaceSelector = document.querySelector(".keyword-slot-selector").value;
+    localStorage.setItem(`ck${replaceSelector}`, `${newKeyword}`);
+    updateCustomKeywordArray();
+    updateHeaderHTML(customKeywordArray);
+    updateHeaderButtonElemArray();
+    updateHeaderButtonOnclicks(headerButtonElemArray);
+});
+
+/* Set checkbox value to unchecked */
+englishOnlyInputElem.checked = false;
 

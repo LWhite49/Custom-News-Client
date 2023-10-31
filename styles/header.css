@@ -46,15 +46,17 @@ body{
     background-color: #175a4c;
 }
 
-.center-div, .search-div{
+.center-div, .search-div,.save-keyword-div{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .search-div{
     padding-top: 120px;
-    align-items: center;
-    justify-content: center;
+}
+
+.save-keyword-div{
+    margin-top: 40px;
 }
 .search-input{
     background-color: #e0dce5;
@@ -74,7 +76,7 @@ body{
     outline:none;
     border-color: #07886e;
 }
-.sortby-select{
+.sortby-select, .keyword-slot-selector{
     font-size: 14pt;
     font-family: "Gabarito";
     margin-left: 8px;
@@ -87,9 +89,12 @@ body{
     padding: 8px 6px 8px 6px;
     cursor: pointer;
 }
-.sortby-select-label, .search-input-label{
+.sortby-select-label, .search-input-label, .keyword-slot-selection-label{
     font-size: 14pt;
     font-family: "Gabarito";
+}
+.keyword-slot-selection-label{
+    margin-left: 40px;
 }
 .language-toggle{
     background-color: #eedbcd;
@@ -109,6 +114,24 @@ body{
     transition: color .2s, background-color .2s;
 }
 .generate-articles-button:hover{
+    background-color: #175a4c;
+    color:#e0dce5;
+}
+.save-keyword-button{
+    font-size: 14pt;
+    font-family: "Gabarito";
+    padding: 8px 12px 8px 12px;
+    border-width: 2px;
+    margin-left: 40px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #175a4c;
+    background-color: #e0dce5;
+    cursor: pointer;
+    transition: color .2s, background-color .2s;
+    margin-right: 30px;
+}
+.save-keyword-button:hover{
     background-color: #175a4c;
     color:#e0dce5;
 }
