@@ -4,8 +4,8 @@ body{
 }
 .background{
     background-color:#D9E8E5;
-    height: calc(100% - 140px);
-    min-height: calc(100vh - 140px);
+    height: 100%;
+    min-height: calc(100vh - 100px);
     margin-top: 100px;
     z-index: -1;
 }
@@ -319,4 +319,119 @@ body{
 }
 .image-anchor-tag{
     cursor: pointer;
+}
+
+/* Width scaling */
+
+@media (max-width: 1800px) {
+    .article-display{
+        width: 1400px;
+    }
+    .article-display-date-wrap{
+        margin-left: 7px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .article-display{
+        width: 1180px;
+    }
+}
+@media (max-width: 1260px) {
+    .article-output-wrap{
+        margin-top: 20px;
+    }
+    .pinned-topic{
+        font-size: 18pt;
+        width: 120px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+    .article-display{
+        width: 1000px;
+    }
+    .search-input{
+        font-size: 13pt;
+        width: 150px;
+        margin-right: 20px;
+    }
+    .sortby-select{
+        font-size: 13pt;
+        margin-right: 20px;
+    }
+    .generate-articles-button{
+        font-size: 13pt;
+        margin-left: 20px;
+    }
+    .save-keyword-button{
+        font-size: 13pt;
+        margin-right: 20px;
+    }
+    .keyword-slot-selector{
+        font-size: 13pt;
+    }
+    .reset-keyword-button{
+        font-size: 13pt;
+    }
+    .article-display-title-wrap{
+        width: 600px;
+    }
+    .article-display-date-wrap{
+        width: 164px;
+    }
+}
+
+@media (max-width: 1080px) {
+    .pinned-topic{
+        font-size: 16pt;
+        width: 100px;
+    }
+    .article-display{
+        width: 900px;
+    }
+    .article-display-title{
+        font-size: 17pt;
+    }
+    .article-display-title-wrap{
+        width: 520px;
+    }
+    .article-display-date{
+        font-size: 16pt;
+    }
+    .article-display-author{
+        font-size: 16pt;
+    }
+    .article-display-author-wrap{
+        width: 380px;
+    }
+    .article-display-source{
+        font-size: 16pt;
+    }
+    .article-display-source-wrap{
+        width: 296px;
+    }
+    .article-display-link-wrap{
+        width: 600px;
+        font-size: 16pt;
+    }
+}
+
+@media (max-width: 1000px ) {
+    .pinned-topic{
+        font-size: 13pt;
+        font-weight: 700;
+        width: 84px;
+        padding-left: 0px;
+        padding-right: 0px;
+
+    }
+    .article-display{
+        width: 740px;
+    }
+    .article-display-link-wrap{
+        width: 500px;
+    }
+    .image-wrap-margin{
+        margin-right: 20px;
+    }
 }
