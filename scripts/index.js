@@ -10,6 +10,7 @@ const generateArticleButtonElem = document.querySelector(".generate-articles-but
 const keywordInputElem = document.querySelector(".search-input");
 const englishOnlyInputElem = document.getElementById("language-toggle");
 const saveKeywordButtonElem = document.querySelector(".save-keyword-button");
+const resetKeywordButtonElem = document.querySelector(".reset-keyword-button");
 
 /* CREATE THE HEADER BUTTONS BY PULLING FROM LOCAL STORAGE AND USING HTML GENERATION, THEN ADD ONCLICK LISTENERS TO GENERATE ARTICLES FOR EACH. 
    DONE BY CREATING FOUR FUNCTIONS THAT CALL KEYWORDS FROM LOCAL STORAGE INTO AN ARRAY, ONE THAT UPDATES HEADER HTML USING THAT ARRAY,
@@ -229,6 +230,18 @@ saveKeywordButtonElem.addEventListener("click", () => {
     updateHeaderButtonOnclicks(headerButtonElemArray);
 });
 
+/* Add click listener to reset keyword button that clears all data from localStorage, and rerenders page */
+resetKeywordButtonElem.addEventListener("click", () => {
+    localStorage.removeItem("ck1");
+    localStorage.removeItem("ck2");
+    localStorage.removeItem("ck3");
+    localStorage.removeItem("ck4");
+    localStorage.removeItem("ck5");
+    updateCustomKeywordArray();
+    updateHeaderHTML(customKeywordArray);
+    updateHeaderButtonElemArray();
+    updateHeaderButtonOnclicks(headerButtonElemArray);
+});
 /* Set checkbox value to unchecked */
 englishOnlyInputElem.checked = false;
 

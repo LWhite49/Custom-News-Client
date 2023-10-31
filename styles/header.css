@@ -6,7 +6,7 @@ body{
     background-color:#D9E8E5;
     height: calc(100% - 140px);
     min-height: calc(100vh - 140px);
-    margin-top: 140px;
+    margin-top: 100px;
     z-index: -1;
 }
 .website-header{
@@ -94,7 +94,7 @@ body{
     font-family: "Gabarito";
 }
 .keyword-slot-selection-label{
-    margin-left: 40px;
+    margin-left: 32px;
 }
 .language-toggle{
     background-color: #eedbcd;
@@ -117,7 +117,7 @@ body{
     background-color: #175a4c;
     color:#e0dce5;
 }
-.save-keyword-button{
+.save-keyword-button, .reset-keyword-button{
     font-size: 14pt;
     font-family: "Gabarito";
     padding: 8px 12px 8px 12px;
@@ -131,7 +131,7 @@ body{
     transition: color .2s, background-color .2s;
     margin-right: 30px;
 }
-.save-keyword-button:hover{
+.save-keyword-button:hover, .reset-keyword-button:hover{
     background-color: #175a4c;
     color:#e0dce5;
 }
@@ -149,7 +149,7 @@ body{
     gap: 30px;
     justify-content: center;
     align-items: center;
-    margin-top: 120px;
+    margin-top: 80px;
 }
 .article-display{
     display: flex;
